@@ -29,7 +29,7 @@ public final class ListaProducto extends javax.swing.JFrame {
     //metodo para cargar los datos de la base de dabos
     public void cargarProducto() {
         try {
-            DAOProducto dao = new DAOProductoImpl();
+            DAOProducto dao = new DAOProductoImpl();            
             DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
             List<TablaProducto> productos = dao.listar();
 
@@ -265,10 +265,18 @@ public final class ListaProducto extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
             String buscar = txtBuscar.getText();
+            if (buscar.isEmpty()) {
+                // Mostrar un mensaje de error o realizar alguna acción si algún campo está vacío
+                JOptionPane.showMessageDialog(this, "Por favor, engresa que buscar.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                txtBuscar.requestFocus();
+                return;
+            }
             DAOProducto dao = new DAOProductoImpl();
             DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
+            tablaP.setRowCount(0);
             List<TablaProducto> productos = dao.buscar(buscar);
-
+            
             // Verificar si hay productos en la lista antes de mostrarlos
             if (!productos.isEmpty()) {
                 productos.forEach((u) -> tablaP.addRow(new Object[]{
