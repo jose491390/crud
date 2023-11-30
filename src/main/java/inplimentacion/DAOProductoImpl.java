@@ -136,36 +136,31 @@ public class DAOProductoImpl extends BdConexion implements DAOProducto {
 
     @Override
     public List<TablaProducto> buscar(String name) throws Exception {
-        List<TablaProducto> productos;
-        productos = null;
-        try {
-            this.conectar();
-            String query = name.isEmpty() ? "SELECT * FROM tablaproducto" :
-                    "SELECT * FROM tablaproducto WHERE nombre LIKE '%" + name  + "%'; ";
-            PreparedStatement st = this.conexion.prepareStatement(query);
-            productos = new ArrayList();
-            ResultSet rs = st.executeQuery();
-             while (rs.next()) {
-                        TablaProducto producto = new TablaProducto();
-                        producto.setId(rs.getInt("id"));
-                        producto.setNombre(rs.getString("nombre"));
-                        producto.setDescripcion(rs.getString("descripcion"));
-                        producto.setPrecioUnidadCompra(rs.getInt("precioUnidadCompra"));
-                        producto.setIva(rs.getInt("iva"));
-                        producto.setPrecioUnidadVenta(rs.getInt("precioUnidadVenta"));
+        List<TablaProducto> productos = null;
+    try {
+        this.conectar();
+        String query = name.isEmpty() ? "SELECT * FROM tablaproducto" :
+                "SELECT * FROM tablaproducto WHERE nombre LIKE '%" + name  + "%'; ";
+        PreparedStatement st = this.conexion.prepareStatement(query);
+        productos = new ArrayList<>();
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            TablaProducto producto = new TablaProducto();
+            producto.setId(rs.getInt("id"));
+            producto.setNombre(rs.getString("nombre"));
+            producto.setDescripcion(rs.getString("descripcion"));
+            producto.setPrecioUnidadCompra(rs.getInt("precioUnidadCompra"));
+            producto.setIva(rs.getInt("iva"));
+            producto.setPrecioUnidadVenta(rs.getInt("precioUnidadVenta"));
 
-                        productos.add(producto);
-                    }
-        } catch (SQLException e) {
-        } finally {
+            productos.add(producto);
         }
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        // Cerrar recursos como PreparedStatement y ResultSet en esta sección si es necesario
+        this.cerrar();
     }
-       
-        
-        
-    
-
-    
-
+    return productos;
+    }
 }
