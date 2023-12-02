@@ -35,7 +35,6 @@ public class Registrar extends javax.swing.JFrame {
     }
     private boolean esDouble() {
         try {
-
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -263,7 +262,7 @@ public class Registrar extends javax.swing.JFrame {
                 int inId = Integer.parseInt(id);
                 producto.setId(inId);
 
-            } else {
+            } else {  
                 todasLasValidacionesExitosas = false;
             }
             if (esEntero()) {
@@ -302,17 +301,18 @@ public class Registrar extends javax.swing.JFrame {
                     txtIva.setText("");
                     txtPrecioCompra.setText("");
                     txtPrecioVenta.setText("");
-                    
                 } catch (Exception e) {
-
+                    
                 }
             } else {
 
             }
         } catch (Exception e) {
-            String mensajeUsuario = "no se puede registrar el producto por que los valores de ID, PRECIO O IVA son INVALIDOS";
-            JOptionPane.showMessageDialog(this, mensajeUsuario,
-                    "MENSAJE INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            String mensaje = e.getMessage();       
+            
+           // String mensajeUsuario = "no se puede registrar el producto por que los valores de ID, PRECIO O IVA son INVALIDOS";
+                JOptionPane.showMessageDialog(this, mensaje,
+                        "MENSAJE INFORMATION", JOptionPane.INFORMATION_MESSAGE);      
         }
     }//GEN-LAST:event_guardarActionPerformed
 
@@ -403,5 +403,4 @@ public class Registrar extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioVenta;
     // End of variables declaration//GEN-END:variables
 
-   
 }
