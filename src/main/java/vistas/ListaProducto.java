@@ -29,7 +29,7 @@ public final class ListaProducto extends javax.swing.JFrame {
     //metodo para cargar los datos de la base de dabos
     public void cargarProducto() {
         try {
-            DAOProducto dao = new DAOProductoImpl();            
+            DAOProducto dao = new DAOProductoImpl();
             DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
             List<TablaProducto> productos = dao.listar();
 
@@ -207,7 +207,7 @@ public final class ListaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
+         DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
 
         // Limpia todas las filas existentes en la tabla
         tablaP.setRowCount(0);
@@ -252,7 +252,7 @@ public final class ListaProducto extends javax.swing.JFrame {
 
                 // Mostrar la ventana de edición
                 ventanaEdicion.setVisible(true);
-
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -276,7 +276,7 @@ public final class ListaProducto extends javax.swing.JFrame {
             DefaultTableModel tablaP = (DefaultTableModel) tablaProductos.getModel();
             tablaP.setRowCount(0);
             List<TablaProducto> productos = dao.buscar(buscar);
-            
+
             // Verificar si hay productos en la lista antes de mostrarlos
             if (!productos.isEmpty()) {
                 productos.forEach((u) -> tablaP.addRow(new Object[]{
